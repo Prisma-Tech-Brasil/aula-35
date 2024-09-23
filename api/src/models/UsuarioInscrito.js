@@ -9,11 +9,15 @@ class UsuarioInscrito extends Usuario {
   }
 
   inscreverSeNoCanal(idCanal) {
-    // Lógica
+    if (!idCanal) {
+      return "O canal deve ser informado!";
+    }
+
+    this.canaisInscritos.push(parseInt(idCanal));
   }
 
   listarCanaisInscritos() {
-    // Lógica
+    return this.canaisInscritos;
   }
 }
 

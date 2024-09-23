@@ -1,5 +1,5 @@
 class Video {
-  constructor(id, titulo, descricao, quantidadeViews, image, canalID) {
+  constructor(id, titulo, descricao, quantidadeViews = 0, image, canalID) {
     this.id = id;
     this.titulo = titulo;
     this.descricao = descricao;
@@ -8,14 +8,39 @@ class Video {
     this.canalID = canalID;
   }
 
-  // Método para exibir informações do vídeo
-  exibirInfo() {
-    // Lógica
+  // Incrementar o número de visualizações
+  adicionarView() {
+    this.quantidadeViews += 1;
   }
 
-  // Método para adicionar uma visualização
-  adicionarView() {
-    // Lógica
+  // Atualizar informações do vídeo
+  atualizarInformacoes(novoTitulo, novaDescricao, novaImagem) {
+    if (novoTitulo) {
+      this.titulo = novoTitulo;
+    }
+    if (novaDescricao) {
+      this.descricao = novaDescricao;
+    }
+    if (novaImagem) {
+      this.image = novaImagem;
+    }
+  }
+
+  // Exibir informações do vídeo
+  exibirInformacoes() {
+    return {
+      id: this.id,
+      titulo: this.titulo,
+      descricao: this.descricao,
+      quantidadeViews: this.quantidadeViews,
+      image: this.image,
+      canalID: this.canalID,
+    };
+  }
+
+  // Verificar se o vídeo pertence a um canal
+  pertenceAoCanal(canalID) {
+    return this.canalID === canalID;
   }
 }
 

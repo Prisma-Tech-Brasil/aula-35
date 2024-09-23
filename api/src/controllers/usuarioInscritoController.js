@@ -6,7 +6,7 @@ const usuariosInscritos = usuarios.filter(
 );
 
 class usuarioInscritoController {
-  index(req, res) {
+  index(_req, res) {
     try {
       if (usuariosInscritos.length > 0) {
         res.status(200).json(usuariosInscritos);

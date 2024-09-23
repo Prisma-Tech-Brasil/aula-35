@@ -3,7 +3,7 @@ const { videos } = require("../mock/dados.json");
 const Video = require("../models/Video");
 
 class videosController {
-  index(req, res) {
+  index(_req, res) {
     try {
       if (videos.length > 0) {
         res.status(200).json(videos);

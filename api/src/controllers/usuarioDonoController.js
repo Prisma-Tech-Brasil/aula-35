@@ -6,7 +6,7 @@ const usuariosDono = usuarios.filter(
 );
 
 class UsuarioDonoController {
-  index(req, res) {
+  index(_req, res) {
     try {
       if (usuariosDono.length > 0) {
         res.status(200).json(usuariosDono);
