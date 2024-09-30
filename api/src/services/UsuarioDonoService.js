@@ -1,9 +1,10 @@
 const UsuarioDono = require("../models/UsuarioDono");
 const { canais } = require("../mock/dados.json");
+const UsuarioPapel = require("../models/UsuarioPapel");
 
 class UsuarioDonoService {
   constructor() {
-    this.usuariosDono = canais.filter((usuario) => usuario.papel === "usuarioDono");
+    this.usuariosDono = canais.filter((usuario) => usuario.papel === UsuarioPapel.USUARIO_DONO);
   }
 
   findAll() {

@@ -1,10 +1,11 @@
 const { usuarios } = require("../mock/dados.json");
 const UsuarioInscrito = require("../models/UsuarioInscrito");
+const UsuarioPapel = require("../models/UsuarioPapel");
 
 class UsuarioInscritoService {
   constructor() {
     this.usuariosInscritos = usuarios.filter(
-      (usuario) => usuario.papel === "usuarioInscritos"
+      (usuario) => usuario.papel === UsuarioPapel.USUARIO_INSCRITO
     );
   }
 

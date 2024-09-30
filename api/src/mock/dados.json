@@ -5,35 +5,35 @@
       "nome": "Brenda Verbena",
       "imagem": null,
       "email": "brenda@example.com",
-      "papel": "usuarioDono"
+      "papel": "usuarioInscrito"
     },
     {
       "id": 2,
       "nome": "Adrya Leal",
       "imagem": null,
       "email": "adrya@example.com",
-      "papel": "usuarioDono"
+      "papel": "usuarioInscrito"
     },
     {
       "id": 3,
       "nome": "Gabrieli Laurenço",
       "imagem": null,
       "email": "gabrieli@example.com",
-      "papel": "usuarioDono"
+      "papel": "usuarioInscrito"
     },
     {
       "id": 4,
       "nome": "PrismaTech Films",
       "imagem": null,
       "email": "prismatech@example.com",
-      "papel": "usuarioDono"
+      "papel": "usuarioInscrito"
     },
     {
       "id": 5,
       "nome": "Lara Cristina",
       "imagem": null,
       "email": "lara@example.com",
-      "papel": "usuarioDono"
+      "papel": "usuarioInscrito"
     }
   ],
   "canais": [
