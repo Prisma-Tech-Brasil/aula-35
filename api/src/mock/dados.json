@@ -41,30 +41,35 @@
       "id": 1,
       "nome": "Canal de Brenda Verbena",
       "videos": [1],
+      "papel": "usuarioDono",
       "dono": 1
     },
     {
       "id": 2,
       "nome": "Canal de Adrya Leal",
       "videos": [2],
+      "papel": "usuarioDono",
       "dono": 2
     },
     {
       "id": 3,
       "nome": "Canal de Gabrieli Laurenço",
       "videos": [3],
+      "papel": "usuarioDono",
       "dono": 3
     },
     {
       "id": 4,
       "nome": "Canal PrismaTech Films",
       "videos": [4, 6],
+      "papel": "usuarioDono",
       "dono": 4
     },
     {
       "id": 5,
       "nome": "Canal de Lara Cristina",
       "videos": [5],
+      "papel": "usuarioDono",
       "dono": 5
     }
   ],

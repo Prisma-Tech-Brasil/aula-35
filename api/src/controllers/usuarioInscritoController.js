@@ -1,13 +1,9 @@
-const { usuarios } = require("../mock/dados.json");
-const UsuarioInscrito = require("../models/UsuarioInscrito");
-
-const usuariosInscritos = usuarios.filter(
-  (usuario) => usuario.papel === "usuarioInscritos"
-);
+const UsuarioInscritoService = require("../services/UsuarioInscritoService");
 
 class UsuarioInscritoController {
   index(_req, res) {
     try {
+      const usuariosInscritos = UsuarioInscritoService.listarUsuarios();
       if (usuariosInscritos.length > 0) {
         res.status(200).json(usuariosInscritos);
       } else {
@@ -23,7 +19,7 @@ class UsuarioInscritoController {
   show(req, res) {
     try {
       const id = parseInt(req.params.id);
-      const usuario = usuariosInscritos.find((v) => v.id === id);
+      const usuario = UsuarioInscritoService.buscarUsuarioPorId(id);
 
       if (usuario) {
         res.status(200).json(usuario);
@@ -40,23 +36,7 @@ class UsuarioInscritoController {
   store(req, res) {
     try {
       const { nome, imagem, email } = req.body;
-
-      const gerarIdUnico = () => {
-        let id;
-        do {
-          id = Math.floor(Math.random() * 1000);
-        } while (usuariosInscritos.some((v) => v.id === id));
-        return id;
-      };
-
-      const novoUsuario = new UsuarioInscrito(
-        gerarIdUnico(),
-        nome,
-        imagem,
-        email
-      );
-
-      usuariosInscritos.push(novoUsuario);
+      const novoUsuario = UsuarioInscritoService.criarUsuario({ nome, imagem, email });
       res.status(201).json(novoUsuario);
     } catch (erro) {
       res
@@ -69,17 +49,13 @@ class UsuarioInscritoController {
     try {
       const { nome, imagem, email } = req.body;
       const id = parseInt(req.params.id);
-      const usuario = usuariosInscritos.find((v) => v.id === id);
+      const usuarioAtualizado = UsuarioInscritoService.atualizarUsuario(id, { nome, imagem, email });
 
-      if (!usuario) {
+      if (!usuarioAtualizado) {
         return res.status(404).json({ mensagem: "Usuário não encontrado" });
       }
 
-      usuario.nome = nome;
-      usuario.imagem = imagem;
-      usuario.email = email;
-
-      res.status(200).json(usuario);
+      res.status(200).json(usuarioAtualizado);
     } catch (erro) {
       res
         .status(500)
@@ -90,10 +66,9 @@ class UsuarioInscritoController {
   delete(req, res) {
     try {
       const id = parseInt(req.params.id);
-      const indiceDoUsuario = usuariosInscritos.findIndex((v) => v.id === id);
+      const usuarioRemovido = UsuarioInscritoService.removerUsuario(id);
 
-      if (indiceDoUsuario !== -1) {
-        const usuarioRemovido = usuariosInscritos.splice(indiceDoUsuario, 1);
+      if (usuarioRemovido) {
         res.status(200).json({
           mensagem: `Usuário id:${id} removido com sucesso!`,
           usuarioRemovido

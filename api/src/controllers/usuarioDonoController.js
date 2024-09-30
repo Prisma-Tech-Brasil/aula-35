@@ -1,13 +1,9 @@
-const UsuarioDono = require("../models/UsuarioDono");
-const { usuarios } = require("../mock/dados.json");
-
-const usuariosDono = usuarios.filter(
-  (usuario) => usuario.papel === "usuarioDono"
-);
+const UsuarioDonoService = require("../services/UsuarioDonoService");
 
 class UsuarioDonoController {
   index(_req, res) {
     try {
+      const usuariosDono = UsuarioDonoService.findAll();
       if (usuariosDono.length > 0) {
         res.status(200).json(usuariosDono);
       } else {
@@ -23,7 +19,7 @@ class UsuarioDonoController {
   show(req, res) {
     try {
       const id = parseInt(req.params.id);
-      const usuario = usuariosDono.find((v) => v.id === id);
+      const usuario = UsuarioDonoService.findById(id);
 
       if (usuario) {
         res.status(200).json(usuario);
@@ -40,24 +36,8 @@ class UsuarioDonoController {
   store(req, res) {
     try {
       const { nome, imagem, email } = req.body;
-
-      const gerarIdUnico = () => {
-        let id;
-        do {
-          id = Math.floor(Math.random() * 1000);
-        } while (usuariosDono.some((v) => v.id === id));
-        return id;
-      };
-
-      const novoVideo = new UsuarioDono(
-        gerarIdUnico(),
-        nome,
-        imagem,
-        email
-      );
-
-      usuariosDono.push(novoVideo);
-      res.status(201).json(novoVideo);
+      const novoUsuario = UsuarioDonoService.create(nome, imagem, email);
+      res.status(201).json(novoUsuario);
     } catch (erro) {
       res
         .status(500)
@@ -69,17 +49,13 @@ class UsuarioDonoController {
     try {
       const { nome, imagem, email } = req.body;
       const id = parseInt(req.params.id);
-      const usuario = usuariosDono.find((v) => v.id === id);
+      const usuarioAtualizado = UsuarioDonoService.update(id, nome, imagem, email);
 
-      if (!usuario) {
+      if (!usuarioAtualizado) {
         return res.status(404).json({ mensagem: "Usuário não encontrado" });
       }
 
-      usuario.nome = nome;
-      usuario.imagem = imagem;
-      usuario.email = email;
-
-      res.status(200).json(usuario);
+      res.status(200).json(usuarioAtualizado);
     } catch (erro) {
       res
         .status(500)
@@ -90,17 +66,16 @@ class UsuarioDonoController {
   delete(req, res) {
     try {
       const id = parseInt(req.params.id);
-      const indiceDoUsuario = usuariosDono.findIndex((v) => v.id === id);
+      const usuarioRemovido = UsuarioDonoService.delete(id);
 
-      if (indiceDoUsuario !== -1) {
-        const usuarioRemovido = usuariosDono.splice(indiceDoUsuario, 1);
-        res.status(200).json({
-          mensagem: `Usuário id:${id} removido com sucesso!`,
-          usuarioRemovido
-        });
-      } else {
-        res.status(404).json({ mensagem: "Usuário não encontrado" });
+      if (!usuarioRemovido) {
+        return res.status(404).json({ mensagem: "Usuário não encontrado" });
       }
+
+      res.status(200).json({
+        mensagem: `Usuário id:${id} removido com sucesso!`,
+        usuarioRemovido
+      });
     } catch (erro) {
       res
         .status(500)
