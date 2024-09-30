@@ -5,7 +5,7 @@ const usuariosInscritos = usuarios.filter(
   (usuario) => usuario.papel === "usuarioInscritos"
 );
 
-class usuarioInscritoController {
+class UsuarioInscritoController {
   index(_req, res) {
     try {
       if (usuariosInscritos.length > 0) {
@@ -109,4 +109,4 @@ class usuarioInscritoController {
   }
 }
 
-module.exports = new usuarioInscritoController();
+module.exports = new UsuarioInscritoController();
