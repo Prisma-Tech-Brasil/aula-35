@@ -1,30 +1,42 @@
 const { Usuario } = require("./Usuario");
-const UsuarioPapel = require("./UsuarioPapel");
+const Video = require("./Video");
 
 class Canal extends Usuario {
-  constructor(id, nome, imagem, email) {
-    super(id, nome, imagem, email, UsuarioPapel.USUARIO_DONO);
+  constructor(id, nome, imagem, email, papel) {
+    super(id, nome, imagem, email, papel);
     this.videos = [];
+    this.inscritos = [];
   }
 
   // Adicionar um novo vídeo
-  postarVideo(video) {
-    // Lógica
+  static postarVideo(video) {
+    const novoVideo = new Video(video);
+    this.videos.push(novoVideo);
+
+    return novoVideo;
   }
 
   // Editar um vídeo por ID
-  editarVideo(idVideo, corpo) {
-    // Lógica
+  static editarVideo(idVideo, corpo) {
+    const video = this.videos.find((video) => video.id === idVideo);
+
+    video.nome = corpo.nome;
+    video.imagem = corpo.imagem;
+    video.email = corpo.email;
+
+    return video;
   }
 
   // Remover um vídeo por ID
-  excluirVideo(idVideo) {
-    // Lógica
+  static excluirVideo(idVideo) {
+    const index = this.videos.findIndex((video) => video.id === idVideo);
+
+    return this.videos.splice(index, 1);
   }
 
   //Gerenciar inscritos no canal
-  listarInscritos() {
-    // Lógica
+  static listarInscritos() {
+    return this.inscritos;
   }
 }
 

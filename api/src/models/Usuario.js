@@ -10,15 +10,15 @@ class Usuario {
     this.inscricoes = [];
   }
 
-  pegarPapel() {
+  static pegarPapel() {
     return this.papel;
   }
 
-  listarInscricoes() {
+  static listarInscricoes() {
     return this.inscricoes;
   }
 
-  inscreverSeNoCanal(idCanal) {
+  static inscreverSeNoCanal(idCanal) {
     this.inscricoes.push(parseInt(idCanal));
   }
 }
