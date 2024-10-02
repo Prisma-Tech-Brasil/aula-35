@@ -24,7 +24,11 @@ class videosService {
     return video;
   }
 
-  excluir(id) {}
+  excluir(id) {
+    const indiceDoVideo = this.buscarPeloId(id);
+
+    return videos.splice(indiceDoVideo, 1);
+  }
 }
 
 module.exports = new videosService();

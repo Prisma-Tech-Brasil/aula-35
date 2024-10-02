@@ -79,13 +79,15 @@ class videosController {
   delete(req, res) {
     try {
       const id = parseInt(req.params.id);
-      const indiceDoVideo = videos.findIndex((v) => v.id === id);
+      if (!id) {
+        throw new Error("O ID não foi passado");
+      }
 
-      if (indiceDoVideo !== -1) {
-        const videoRemovido = videos.splice(indiceDoVideo, 1);
+      const video = videosService.excluir(id);
+      if (video) {
         res.status(200).json({
           mensagem: `Vídeo id:${id} removido com sucesso!`,
-          videoRemovido
+          video
         });
       } else {
         res.status(404).json({ mensagem: "Vídeo não encontrado" });
